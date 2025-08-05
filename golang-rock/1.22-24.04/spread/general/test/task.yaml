@@ -1,0 +1,18 @@
+summary: test the 'golang-rock' project
+
+execute: |
+  docker run --rm -v $(pwd):/workdir golang-rock:latest \
+    exec go run /workdir/hello/cmd/hello/main.go | grep "Hello, World!"
+
+  docker run --rm -v $(pwd):/workdir golang-rock:latest \
+    exec go -C /workdir/hello test
+
+  docker run --rm -v $(pwd):/workdir golang-rock:latest \
+    exec bash -c "CGO_ENABLED=1 go run /workdir/hello/cmd/hello_cgo/main_cgo.go" | grep "Hello from C!"
+
+  apt update && apt install git -y
+  git clone https://github.com/canonical/chisel
+  cd chisel && git checkout v1.1.0
+  docker run --rm -v $(pwd):/workdir golang-rock:latest \
+    exec go -C /workdir build ./cmd/chisel
+  ./chisel
