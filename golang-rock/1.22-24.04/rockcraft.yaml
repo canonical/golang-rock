@@ -1,6 +1,6 @@
 name: golang
-base: ubuntu@24.04
-# base: bare
+build-base: ubuntu@24.04
+base: bare
 version: '1.22'
 summary: The Go programming language
 description: |
@@ -25,8 +25,6 @@ parts:
           base-files_base \
           base-files_chisel \
           base-files_release-info \
-          bash_bins \
-          busybox_bins \
           ca-certificates_data \
           golang_cgo-support \
           binutils-${arch}_assembler \
@@ -34,6 +32,7 @@ parts:
           cpp-13-${arch}_libs \
           gcc-13-${arch}_gcc-13 \
           gcc-13-${arch}_libs
+
       find ${CRAFT_PART_INSTALL}/usr/share/go-1.22 -depth \( \
         \( -path '*test*' ! -path '*src/testing*' ! -path '*src/internal/test*' \) -o \
         \( -path '*/testing/*' -name '*_test.go' \) \

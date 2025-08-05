@@ -8,7 +8,7 @@ execute: |
     exec go -C /workdir/hello test
 
   docker run --rm -v $(pwd):/workdir golang-rock:latest \
-    exec bash -c "CGO_ENABLED=1 go run /workdir/hello/cmd/hello_cgo/main_cgo.go" | grep "Hello from C!"
+    exec go run /workdir/hello/cmd/hello_cgo/main_cgo.go | grep "Hello from C!"
 
   apt update && apt install git -y
   git clone https://github.com/canonical/chisel
