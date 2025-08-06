@@ -1,0 +1,97 @@
+name: golang
+build-base: ubuntu@24.04
+base: bare
+version: '1.24'
+summary: The Go programming language
+description: |
+  Go is an open source programming language that enables the production of
+  simple, efficient and reliable software at scale.
+platforms: 
+  amd64:
+
+# We are not using the _daemon_ run-user, since rockcraft adds this user
+# locked. We however needs sudo to run apt.
+# https://github.com/canonical/rockcraft/blob/acc25f85af3ec691eb7f9f41558164745c03e028/rockcraft/oci.py#L297
+
+parts:
+  golang:
+    plugin: nil
+    source: https://github.com/zhijie-yang/chisel-releases.git
+    source-type: git
+    source-branch: ROCKS-2300/golang-25.04
+    override-build: |
+      arch="${CRAFT_ARCH_TRIPLET_BUILD_FOR//_/-}"
+      chisel cut --release ./ --root ${CRAFT_PART_INSTALL} \
+          base-files_base \
+          base-files_chisel \
+          base-files_release-info \
+          ca-certificates_data \
+          golang_cgo-support \
+          binutils-${arch}_assembler \
+          binutils-${arch}_linker \
+          cpp-14-${arch}_libs \
+          gcc-14-${arch}_gcc-14 \
+          gcc-14-${arch}_libs
+
+      find ${CRAFT_PART_INSTALL}/usr/share/go-1.24 -depth \( \
+              \( -path '*test*' \
+                ! -path '*src/testing*' \
+                ! -path '*src/internal/test*' \
+                ! -path '*src/runtime/synctest*' \) -o \
+        \( -path '*/testing/*' -name '*_test.go' \) \
+        \) -exec rm -rf {} +
+
+  chisel:
+    plugin: nil
+    after: [golang]
+    stage-snaps:
+      - chisel
+    organize:
+      bin/chisel: usr/bin/chisel
+    stage:
+      - usr/bin/chisel
+
+  manifest:
+    plugin: nil
+    after: [golang, chisel]
+    build-packages:
+      - zstd
+      - jq
+    override-build: |
+      mkdir -p $CRAFT_PART_INSTALL/usr/share/rocks
+      FIELDS=(
+        '${db:Status-Abbrev}'
+        '${binary:Package}'
+        '${Version}'
+        '${source:Package}'
+        '${Source:Version}\n'
+      )
+      zstd -d -f -q $CRAFT_STAGE/var/lib/chisel/manifest.wall \
+        -o $CRAFT_PART_BUILD/manifest
+
+      # Awk fortmat
+      awk_script='
+      {
+        binary=$1
+        version=$2
+        cmd = "dpkg-query -W -f='\''${source:Package}\n'\'' " binary " | head -n 1"
+        if ((cmd | getline source) > 0) {
+          print "ii ," binary ":" arch "," version "," source "," version
+        }
+        close(cmd)
+      }'
+
+      # Create security manifest file
+      (echo "# os-release" && cat /etc/os-release && echo "# dpkg-query") \
+      > $CRAFT_PART_INSTALL/usr/share/rocks/dpkg.query
+
+      # Add packages
+      (
+        awk -v arch=${CRAFT_ARCH_BUILD_FOR} -F' ' "$awk_script" <<< \
+        $(
+          jq -r 'select(.kind == "package") | "\(.name) \(.version)"' \
+          $CRAFT_PART_BUILD/manifest
+        )
+      ) >> $CRAFT_PART_INSTALL/usr/share/rocks/dpkg.query
+
+      craftctl default
