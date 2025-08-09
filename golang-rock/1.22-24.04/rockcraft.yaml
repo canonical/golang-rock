@@ -29,9 +29,8 @@ parts:
           golang_cgo-support \
           binutils-${arch}_assembler \
           binutils-${arch}_linker \
-          cpp-13-${arch}_libs \
-          gcc-13-${arch}_gcc-13 \
-          gcc-13-${arch}_libs
+          cpp-13-${arch}_native \
+          gcc-13-${arch}_gcc-13
 
       find ${CRAFT_PART_INSTALL}/usr/share/go-1.22 -depth \( \
         \( -path '*test*' ! -path '*src/testing*' ! -path '*src/internal/test*' \) -o \
