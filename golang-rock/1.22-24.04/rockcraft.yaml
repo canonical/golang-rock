@@ -8,6 +8,7 @@ description: |
   simple, efficient and reliable software at scale.
 platforms: 
   amd64:
+  arm64:
 
 # We are not using the _daemon_ run-user, since rockcraft adds this user
 # locked. We however needs sudo to run apt.
