@@ -23,16 +23,28 @@ parts:
     override-build: |
       arch="${CRAFT_ARCH_TRIPLET_BUILD_FOR//_/-}"
       chisel cut --release ./ --root ${CRAFT_PART_INSTALL} \
+          apt_apt-get \
           base-files_base \
           base-files_chisel \
           base-files_release-info \
-          ca-certificates_data \
-          golang_cgo-support \
+          base-passwd_data \
+          bash_bins \
           binutils-${arch}_assembler \
           binutils-${arch}_linker \
+          ca-certificates_data \
+          coreutils_bins \
           cpp-14-${arch}_native \
-          gcc-14-${arch}_gcc-14
+          debianutils_which \
+          findutils_bins \
+          gcc-14-${arch}_gcc-14 \
+          golang_cgo-support \
+          grep_bins \
+          gzip_bins \
+          tar_bins \
+          wget_bins \
+          zstd_bins
 
+      # Remove the unnecessary test files
       find ${CRAFT_PART_INSTALL}/usr/share/go-1.24 -depth \( \
               \( -path '*test*' \
                 ! -path '*src/testing*' \
