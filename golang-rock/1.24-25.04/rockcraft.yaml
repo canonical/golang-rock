@@ -53,19 +53,9 @@ parts:
         \( -path '*/testing/*' -name '*_test.go' \) \
         \) -exec rm -rf {} +
 
-  chisel:
-    plugin: nil
-    after: [golang]
-    stage-snaps:
-      - chisel
-    organize:
-      bin/chisel: usr/bin/chisel
-    stage:
-      - usr/bin/chisel
-
   manifest:
     plugin: nil
-    after: [golang, chisel]
+    after: [golang]
     build-packages:
       - zstd
       - jq
