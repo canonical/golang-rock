@@ -71,7 +71,7 @@ parts:
       zstd -d -f -q $CRAFT_STAGE/var/lib/chisel/manifest.wall \
         -o $CRAFT_PART_BUILD/manifest
 
-      # Awk fortmat
+      # Awk format
       awk_script='
       {
         binary=$1
