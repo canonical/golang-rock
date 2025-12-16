@@ -2,7 +2,6 @@
 
 ## Reporting a vulnerability
 
-<!--- TODO: Update the Private Security Report link--->
 
 To report a security issue, you can either:
  - file a [Private Security Report](https://github.com/canonical/golang-rock/security/advisories/new) (see
