@@ -1,4 +1,4 @@
-name: golang
+name: go
 build-base: ubuntu@24.04
 base: bare
 version: '1.22'
@@ -17,78 +17,34 @@ platforms:
 parts:
   golang:
     plugin: nil
-    source: https://github.com/zhijie-yang/chisel-releases.git
-    source-type: git
-    source-branch: ROCKS-2299/golang-24.04-simplified
     override-build: |
       arch="${CRAFT_ARCH_TRIPLET_BUILD_FOR//_/-}"
-      chisel cut --release ./ --root ${CRAFT_PART_INSTALL} \
+      chisel cut --arch ${CRAFT_ARCH_BUILD_FOR} --root ${CRAFT_PART_INSTALL} \
+          apt_apt-get \
           base-files_base \
           base-files_chisel \
           base-files_release-info \
+          base-passwd_data \
+          bash_bins \
           ca-certificates_data \
+          coreutils_bins \
+          debianutils_which \
+          findutils_bins \
           golang_cgo-support \
-          binutils-${arch}_assembler \
-          binutils-${arch}_linker \
-          cpp-13-${arch}_native \
-          gcc-13-${arch}_gcc-13
+          grep_bins \
+          gzip_bins \
+          tar_bins \
+          wget_bins \
+          zstd_bins
 
       find ${CRAFT_PART_INSTALL}/usr/share/go-1.22 -depth \( \
         \( -path '*test*' ! -path '*src/testing*' ! -path '*src/internal/test*' \) -o \
         \( -path '*/testing/*' -name '*_test.go' \) \
         \) -exec rm -rf {} +
 
-  chisel:
-    plugin: nil
-    after: [golang]
-    stage-snaps:
-      - chisel
-    organize:
-      bin/chisel: usr/bin/chisel
-    stage:
-      - usr/bin/chisel
-
-  manifest:
-    plugin: nil
-    after: [golang, chisel]
-    build-packages:
-      - zstd
-      - jq
-    override-build: |
-      mkdir -p $CRAFT_PART_INSTALL/usr/share/rocks
-      FIELDS=(
-        '${db:Status-Abbrev}'
-        '${binary:Package}'
-        '${Version}'
-        '${source:Package}'
-        '${Source:Version}\n'
-      )
-      zstd -d -f -q $CRAFT_STAGE/var/lib/chisel/manifest.wall \
-        -o $CRAFT_PART_BUILD/manifest
-
-      # Awk fortmat
-      awk_script='
-      {
-        binary=$1
-        version=$2
-        cmd = "dpkg-query -W -f='\''${source:Package}\n'\'' " binary " | head -n 1"
-        if ((cmd | getline source) > 0) {
-          print "ii ," binary ":" arch "," version "," source "," version
-        }
-        close(cmd)
-      }'
-
-      # Create security manifest file
-      (echo "# os-release" && cat /etc/os-release && echo "# dpkg-query") \
-      > $CRAFT_PART_INSTALL/usr/share/rocks/dpkg.query
-
-      # Add packages
-      (
-        awk -v arch=${CRAFT_ARCH_BUILD_FOR} -F' ' "$awk_script" <<< \
-        $(
-          jq -r 'select(.kind == "package") | "\(.name) \(.version)"' \
-          $CRAFT_PART_BUILD/manifest
-        )
-      ) >> $CRAFT_PART_INSTALL/usr/share/rocks/dpkg.query
-
-      craftctl default
+  deb-security-manifest:
+    plugin: make
+    source: https://github.com/canonical/rocks-security-manifest
+    source-type: git
+    source-branch: main
+    override-prime: gen_manifest
