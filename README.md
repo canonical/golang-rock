@@ -14,7 +14,7 @@ Let's build [`Chisel`](https://github.com/canonical/chisel)!
 First clone the repository and checkout a specific tag:
 
 ```bash
-git clone --depth 1 https://github.com/canonical/chisel
+git clone --depth 1 -b v1.1.0 https://github.com/canonical/chisel
 cd chisel
 ```
 
