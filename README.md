@@ -22,10 +22,10 @@ Now lets launch the go container with the code directory mounted:
 
 ```bash
 $ docker run --name=go-container --rm -it -v ./:/work go:1.22
-2025-10-06T09:12:26.508Z [pebble] {"type":"security","datetime":"2025-10-06T09:12:26Z","level":"WARN","event":"sys_startup:0","description":"Starting daemon","appid":"pebble"}
-2025-10-06T09:12:26.508Z [pebble] Started daemon.
-2025-10-06T09:12:26.509Z [pebble] POST /v1/services 81.875µs 400 (http+unix)
-2025-10-06T09:12:26.509Z [pebble] Cannot start default services: no default services
+2025-12-16T17:26:16.476Z [pebble] {"type":"security","datetime":"2025-12-16T17:26:16Z","level":"WARN","event":"sys_startup:0","description":"Starting daemon","appid":"pebble"}
+2025-12-16T17:26:16.476Z [pebble] Started daemon.
+2025-12-16T17:26:16.477Z [pebble] POST /v1/services 127.239µs 400 (http+unix)
+2025-12-16T17:26:16.477Z [pebble] Cannot start default services: no default services
 ```
 
 The rock is running, but [`pebble`](https://github.com/canonical/pebble) - the container entrypoint does not have any entry point. This is fine! This is not a rock with a service. Its for building applications. Let's now log into the container and build the application. In a separate terminal run:
