@@ -14,6 +14,10 @@ platforms:
 # locked. We however needs sudo to run apt.
 # https://github.com/canonical/rockcraft/blob/acc25f85af3ec691eb7f9f41558164745c03e028/rockcraft/oci.py#L297
 
+# TODO: Investigate and change GOTOOLCHAIN to "local+auto"
+environment:
+  GOTOOLCHAIN: local
+
 parts:
   golang:
     plugin: nil
