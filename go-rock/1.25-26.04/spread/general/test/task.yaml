@@ -7,7 +7,7 @@ execute: |
   docker run --rm -v $(pwd):/workdir go-rock:latest \
     exec go -C /workdir/hello test
 
-  docker run --rm -v $(pwd):/workdir go-rock:latest \
+  docker run --rm -v $(pwd):/workdir -e CGO_ENABLED=1 go-rock:latest \
     exec go run /workdir/hello/cmd/hello_cgo/main_cgo.go | grep "Hello from C!"
 
   apt update && apt install git -y
