@@ -1,5 +1,5 @@
 name: go
-build-base: ubuntu@24.04
+build-base: devel
 base: bare
 version: '1.25'
 summary: The Go programming language
