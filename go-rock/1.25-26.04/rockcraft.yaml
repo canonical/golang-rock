@@ -1,4 +1,5 @@
 name: go
+# TODO: Change the build-base to ubuntu@26.04 once it goes stable
 build-base: devel
 base: bare
 version: '1.25'
@@ -22,6 +23,7 @@ parts:
   golang:
     plugin: nil
     override-build: |
+      # TODO: Remove `--ignore=unstable` once 26.04 goes stable
       chisel cut --root ${CRAFT_PART_INSTALL} --ignore=unstable \
           apt_apt-get \
           base-files_base \
