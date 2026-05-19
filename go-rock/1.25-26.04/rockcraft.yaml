@@ -1,6 +1,5 @@
 name: go
-# TODO: Change the build-base to ubuntu@26.04 once it goes stable
-build-base: devel
+build-base: ubuntu@26.04
 base: bare
 version: '1.25'
 summary: The Go programming language
