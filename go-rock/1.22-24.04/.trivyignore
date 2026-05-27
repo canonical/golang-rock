@@ -1,0 +1,49 @@
+#####################################################
+# Trivy Ignore File for go-rock/1.22-24.04         #
+# Go 1.22 with Ubuntu 24.04 LTS (noble)            #
+#####################################################
+
+#####################################################
+# The following vulnerabilities are NOT FIXED yet. #
+# References: https://ubuntu.com/security/<CVE-ID>#
+#####################################################
+
+# Query race condition in crypto during Scan()
+# Affects both Go 1.22 and 1.25
+# CVSS: 7.0 (High) | Status: Needs evaluation
+CVE-2025-47907
+
+# tar.Reader unbounded memory allocation with sparse files
+# Affects both Go 1.22 and 1.25
+# CVSS: 4.3 (Medium) | Status: Needs evaluation
+CVE-2025-58183
+
+# HTTP cookie parsing unbounded memory consumption
+# Affects both Go 1.22 and 1.25
+# CVSS: 5.3 (Medium) | Status: Needs evaluation
+CVE-2025-58186
+
+# Name constraint checking quadratic algorithm in crypto/x509
+# Affects both Go 1.22 and 1.25
+# CVSS: 7.5 (High) | Status: Needs evaluation
+CVE-2025-58187
+
+# HostnameError quadratic string construction
+# Affects both Go 1.22 and 1.25
+# CVSS: 7.5 (High) | Status: Needs evaluation
+CVE-2025-61729
+
+# TLS session resumption bypass in crypto/tls
+# Affects both Go 1.22 and 1.25
+# CVSS: 9.1 (Critical) | Status: Vulnerable (not yet fixed)
+CVE-2025-68121
+
+# net/url unbounded memory consumption with URL forms
+# Go 1.22 specific (not in Ubuntu 26.04)
+# CVSS: 7.5 (High) | Status: Needs evaluation
+CVE-2025-61726
+
+# archive/zip super-linear indexing algorithm DoS
+# Go 1.22 specific (not in Ubuntu 26.04)
+# CVSS: 6.5 (Medium) | Status: Needs evaluation
+CVE-2025-61728
