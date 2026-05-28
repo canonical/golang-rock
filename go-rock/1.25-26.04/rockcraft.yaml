@@ -1,6 +1,5 @@
 name: go
-# TODO: Change the build-base to ubuntu@26.04 once it goes stable
-build-base: devel
+build-base: ubuntu@26.04
 base: bare
 version: '1.25'
 summary: The Go programming language
@@ -34,7 +33,8 @@ parts:
       - coreutils_bins
       - debianutils_which
       - findutils_bins
-      - golang_cgo-support
+      # Manually point to golang-1.25 as the package golang now points to golang-1.26 as of May 27, 2026.
+      - golang-1.25_cgo-support
       - grep_bins
       - gzip_bins
       - tar_bins
@@ -55,6 +55,11 @@ parts:
            ! -path '*synctest_o*' \) -o \
         \( -path '*/testing/*' -name '*_test.go' \) \
         \) -exec rm -rf {} +
+
+      # Manually set up the symlinks used to be provided by golang-go=1.25
+      ln -s "../lib/go-1.25/bin/go" ${CRAFT_PART_INSTALL}/usr/bin/go
+      ln -s "../lib/go-1.25/bin/gofmt" ${CRAFT_PART_INSTALL}/usr/bin/gofmt
+      ln -s "../share/go-1.25" ${CRAFT_PART_INSTALL}/usr/lib/go
 
   deb-security-manifest:
     plugin: make
