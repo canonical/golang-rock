@@ -8,40 +8,15 @@
 # References: https://ubuntu.com/security/<CVE-ID>#
 #####################################################
 
-# Cancelling a query during Scan() can cause a race condition overwriting results
-# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
-# CVSS: 7.0 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Not affected [FIXED - review for removal]
-CVE-2025-47907
-
-# tar.Reader unbounded memory allocation with sparse files
-# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
-# CVSS: 4.3 (Medium) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
-CVE-2025-58183
-
-# HTTP cookie parsing unbounded memory consumption
-# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
-# CVSS: 5.3 (Medium) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
-CVE-2025-58186
-
-# Name constraint checking quadratic algorithm in crypto/x509
-# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
-# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
-CVE-2025-58187
-
-# HostnameError quadratic string construction in crypto/tls
-# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
-# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
-CVE-2025-61729
-
-# TLS session resumption bypass in crypto/tls
-# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
-# CVSS: 7.4 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Vulnerable
-CVE-2025-68121
-
 # net/url incorrect IPv6 host literal parsing
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
 # CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
 CVE-2026-25679
+
+# crypto/x509 VerifyHostname quadratic SAN matching with large SAN lists
+# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
+# CVSS: 6.5 (Medium) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
+CVE-2026-27145
 
 # crypto/x509 + crypto/tls certificate chain validation DoS
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
@@ -65,7 +40,7 @@ CVE-2026-33811
 
 # net/http HTTP/2 SETTINGS_MAX_FRAME_SIZE=0 causes infinite loop
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
-# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (26.04 resolute): not tracked for 26.04
+# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
 CVE-2026-33814
 
 # net/mail ParseAddress/ParseAddressList/ParseDate crafted input DoS
@@ -83,11 +58,6 @@ CVE-2026-39823
 # CVSS: 5.3 (Medium) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
 CVE-2026-39825
 
-# html/template script tag with empty type attribute incorrect escaping
-# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
-# CVSS: 6.1 (Medium) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
-CVE-2026-39826
-
 # net Dial and LookupPort panic on NUL input on Windows
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
 # CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Not affected [FIXED - review for removal]
@@ -97,3 +67,8 @@ CVE-2026-39836
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
 # CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
 CVE-2026-42499
+
+# mime: decoding maliciously-crafted MIME header with many invalid encoded-words causes CPU exhaustion
+# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
+# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
+CVE-2026-42504

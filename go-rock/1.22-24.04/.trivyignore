@@ -8,25 +8,20 @@
 # References: https://ubuntu.com/security/<CVE-ID>#
 #####################################################
 
-# Cancelling a query during Scan() can cause a race condition overwriting results
-# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
-# CVSS: 7.0 (High) | Ubuntu priority: Medium | Status (24.04 noble): Vulnerable
-CVE-2025-47907
+# encoding/gob: golang: Calling Decoder.Decode on a message with deeply nested structures can panic
+# Affects: 1.22-24.04
+# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (24.04 noble): fixed in golang-1.22 1.22.2-2ubuntu0.3 [FIXED - review for removal]
+CVE-2024-34156
 
-# tar.Reader unbounded memory allocation with sparse files
-# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
-# CVSS: 4.3 (Medium) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-58183
+# net.Is methods incorrect behavior for IPv4-mapped IPv6 addresses
+# Affects: 1.22-24.04
+# CVSS: 9.8 (Critical) | Ubuntu priority: Medium | Status (24.04 noble): fixed in golang-1.22 1.22.2-2ubuntu0.1 [FIXED - review for removal]
+CVE-2024-24790
 
-# HTTP cookie parsing unbounded memory consumption
-# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
-# CVSS: 5.3 (Medium) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-58186
-
-# Name constraint checking quadratic algorithm in crypto/x509
-# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
+# net/url unbounded memory consumption via URL query parameters
+# Affects: 1.22-24.04
 # CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-58187
+CVE-2025-61726
 
 # HostnameError quadratic string construction in crypto/tls
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
@@ -38,75 +33,15 @@ CVE-2025-61729
 # CVSS: 7.4 (High) | Ubuntu priority: Medium | Status (24.04 noble): Vulnerable
 CVE-2025-68121
 
-# net/url unbounded memory consumption with URL forms
-# Affects: 1.22-24.04
-# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-61726
-
-# archive/zip super-linear indexing algorithm DoS
-# Affects: 1.22-24.04
-# CVSS: 6.5 (Medium) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-61728
-
-# net.Is methods (IsPrivate etc.) incorrect behavior for IPv4-mapped IPv6
-# Affects: 1.22-24.04
-# CVSS: 9.8 (Critical) | Ubuntu priority: Medium | Status (24.04 noble): fixed in golang-1.22 1.22.2-2ubuntu0.1 [FIXED - review for removal]
-CVE-2024-24790
-
-# net/http request smuggling via bare LF as line terminator
-# Affects: 1.22-24.04
-# CVSS: 9.1 (Critical) | Ubuntu priority: Medium | Status (24.04 noble): Vulnerable
-CVE-2025-22871
-
-# PATH executable injection via os/exec LookPath
-# Affects: 1.22-24.04
-# CVSS: 6.5 (Medium) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-47906
-
-# net/netip Parse allows non-IPv6 zone IDs in IPv4 values
-# Affects: 1.22-24.04
-# CVSS: 5.3 (Medium) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-47912
-
-# crypto/x509 malicious DER payload causes large memory allocation
-# Affects: 1.22-24.04
-# CVSS: 5.3 (Medium) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-58185
-
-# crypto/x509 DSA public key chain validation DoS
-# Affects: 1.22-24.04
-# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-58188
-
-# crypto/tls ALPN error leaks hostname
-# Affects: 1.22-24.04
-# CVSS: 5.3 (Medium) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-58189
-
-# Parsing invalid PEM inputs causes non-linear processing time
-# Affects: 1.22-24.04
-# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-61723
-
-# net/textproto Reader.ReadResponse quadratic string handling
-# Affects: 1.22-24.04
-# CVSS: 5.3 (Medium) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-61724
-
-# net/mail ParseAddress domain-literal quadratic processing
-# Affects: 1.22-24.04
-# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-61725
-
-# crypto/x509 excluded subdomain constraint bypass
-# Affects: 1.22-24.04
-# CVSS: 6.5 (Medium) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2025-61727
-
 # net/url incorrect IPv6 host literal parsing
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
 # CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
 CVE-2026-25679
+
+# crypto/x509 VerifyHostname quadratic SAN matching with large SAN lists
+# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
+# CVSS: 6.5 (Medium) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
+CVE-2026-27145
 
 # crypto/x509 + crypto/tls certificate chain validation DoS
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
@@ -130,7 +65,7 @@ CVE-2026-33811
 
 # net/http HTTP/2 SETTINGS_MAX_FRAME_SIZE=0 causes infinite loop
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
-# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (24.04 noble): not tracked for 24.04
+# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
 CVE-2026-33814
 
 # net/mail ParseAddress/ParseAddressList/ParseDate crafted input DoS
@@ -148,11 +83,6 @@ CVE-2026-39823
 # CVSS: 5.3 (Medium) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
 CVE-2026-39825
 
-# html/template script tag with empty type attribute incorrect escaping
-# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
-# CVSS: 6.1 (Medium) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
-CVE-2026-39826
-
 # net Dial and LookupPort panic on NUL input on Windows
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
 # CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (24.04 noble): Not affected [FIXED - review for removal]
@@ -162,3 +92,8 @@ CVE-2026-39836
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
 # CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
 CVE-2026-42499
+
+# mime: decoding maliciously-crafted MIME header with many invalid encoded-words causes CPU exhaustion
+# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
+# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (24.04 noble): Needs evaluation
+CVE-2026-42504
