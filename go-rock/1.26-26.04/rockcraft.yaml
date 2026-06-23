@@ -22,27 +22,25 @@ environment:
 parts:
   golang:
     plugin: nil
-    source: https://github.com/zhijie-yang/chisel-releases.git
-    source-branch: ROCKS-3219/golang-1.26-on-26.04
-    source-type: git
+    stage-packages:
+      - apt_apt-get
+      - base-files_base
+      - base-files_chisel
+      - base-files_release-info
+      - base-passwd_data
+      - bash_bins
+      - ca-certificates_data
+      - coreutils_bins
+      - debianutils_which
+      - findutils_bins
+      - golang_cgo-support
+      - grep_bins
+      - gzip_bins
+      - tar_bins
+      - wget_bins
+      - zstd_bins
     override-build: |
-      chisel cut --root ${CRAFT_PART_INSTALL} --release ./ \
-        apt_apt-get \
-        base-files_base \
-        base-files_chisel \
-        base-files_release-info \
-        base-passwd_data \
-        bash_bins \
-        ca-certificates_data \
-        coreutils_bins \
-        debianutils_which \
-        findutils_bins \
-        golang_cgo-support \
-        grep_bins \
-        gzip_bins \
-        tar_bins \
-        wget_bins \
-        zstd_bins
+      craftctl default
 
       # Remove the unnecessary test files
       # Ref: https://github.com/canonical/chisel-releases/blob/ubuntu-26.04/slices/golang-1.26-src.yaml#L12
