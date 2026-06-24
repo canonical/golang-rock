@@ -1,0 +1,78 @@
+name: go
+build-base: ubuntu@26.04
+base: bare
+version: '1.26'
+summary: The Go programming language
+description: |
+  Go is an open source programming language that enables the production of
+  simple, efficient and reliable software at scale.
+platforms: 
+  amd64:
+  arm64:
+license: null
+
+# We are not using the _daemon_ run-user, since rockcraft adds this user
+# locked. We however needs sudo to run apt.
+# https://github.com/canonical/rockcraft/blob/acc25f85af3ec691eb7f9f41558164745c03e028/rockcraft/oci.py#L297
+
+# TODO: Investigate and change GOTOOLCHAIN to "local+auto"
+environment:
+  GOTOOLCHAIN: local
+
+parts:
+  golang:
+    plugin: nil
+    stage-packages:
+      - apt_apt-get
+      - base-files_base
+      - base-files_chisel
+      - base-files_release-info
+      - base-passwd_data
+      - bash_bins
+      - ca-certificates_data
+      - coreutils_bins
+      - debianutils_which
+      - findutils_bins
+      - golang_cgo-support
+      - grep_bins
+      - gzip_bins
+      - tar_bins
+      - wget_bins
+      - zstd_bins
+    override-build: |
+      craftctl default
+
+      # Remove the unnecessary test files
+      # Ref: https://github.com/canonical/chisel-releases/blob/ubuntu-26.04/slices/golang-1.26-src.yaml#L12
+      find ${CRAFT_PART_INSTALL} -depth \( \
+        -name '*_test.go' -o \
+        \( -type d -name 'testdata' \) -o \
+        \( -type d -path '*/go-1.26/test' \) -o \
+        \( -type d -path '*/src/internal/testenv' \) -o \
+        \( -type d -path '*/src/internal/testpty' \) -o \
+        \( -type d -path '*/src/internal/testhash' \) -o \
+        \( -type d -path '*/src/internal/cgrouptest' \) -o \
+        \( -type d -path '*/src/internal/obscuretestdata' \) -o \
+        \( -type d -path '*/src/internal/coverage/test' \) -o \
+        \( -type d -path '*/src/internal/runtime/startlinetest' \) -o \
+        \( -type d -path '*/src/internal/runtime/wasitest' \) -o \
+        \( -type d -path '*/src/internal/trace/internal/testgen' \) -o \
+        \( -type d -path '*/src/internal/trace/testtrace' \) -o \
+        \( -type d -path '*/src/net/internal/cgotest' \) -o \
+        \( -type d -path '*/src/net/internal/socktest' \) -o \
+        \( -type d -path '*/src/os/exec/internal/fdtest' \) -o \
+        \( -type d -path '*/src/net/http/internal/testcert' \) -o \
+        \( -type d -path '*/src/crypto/internal/cryptotest' \) -o \
+        \( -type d -path '*/src/crypto/internal/fips140/check/checktest' \) -o \
+        \( -type d -path '*/src/crypto/internal/fips140test' \) -o \
+        \( -type d -path '*/src/crypto/mlkem/mlkemtest' \) -o \
+        \( -type d -path '*/src/embed/internal/embedtest' \) -o \
+        \( -type d -path '*/src/vendor/golang.org/x/net/nettest' \) \
+        \) -exec rm -rf {} +
+
+  deb-security-manifest:
+    plugin: make
+    source: https://github.com/canonical/rocks-security-manifest
+    source-type: git
+    source-branch: main
+    override-prime: gen_manifest
