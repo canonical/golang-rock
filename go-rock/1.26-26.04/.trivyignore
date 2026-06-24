@@ -1,6 +1,6 @@
 #####################################################
-# Trivy Ignore File for go-rock/1.25-26.04         #
-# Go 1.25 with Ubuntu 26.04 LTS (resolute)         #
+# Trivy Ignore File for go-rock/1.26-26.04         #
+# Go 1.26 with Ubuntu 26.04 LTS (resolute)         #
 #####################################################
 
 #####################################################
@@ -12,6 +12,11 @@
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
 # CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
 CVE-2026-25679
+
+# crypto/x509 incorrect enforcement of email constraints
+# Affects: 1.26-26.04
+# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
+CVE-2026-27137
 
 # crypto/x509 VerifyHostname quadratic SAN matching with large SAN lists
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
@@ -32,6 +37,11 @@ CVE-2026-32281
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
 # CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
 CVE-2026-32283
+
+# crypto/x509 certificate validation bypass via incorrect DNS constraint application to wildcard SANs
+# Affects: 1.26-26.04
+# CVSS: 7.5 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
+CVE-2026-33810
 
 # net LookupCNAME crash on long CNAME chain via cgo
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
