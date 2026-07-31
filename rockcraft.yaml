@@ -9,6 +9,8 @@ description: |
 platforms: 
   amd64:
   arm64:
+  s390x:
+  ppc64el:
 
 # We are not using the _daemon_ run-user, since rockcraft adds this user
 # locked. We however needs sudo to run apt.
