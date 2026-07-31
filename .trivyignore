@@ -63,6 +63,11 @@ CVE-2026-39820
 # CVSS: 6.1 (Medium) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
 CVE-2026-39823
 
+# os.Root: Symlink following vulnerability allows directory traversal outside of Root
+# Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
+# CVSS: 7.8 (High) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
+CVE-2026-39822
+
 # net/http/httputil ReverseProxy unintended parameter forwarding
 # Affects: 1.22-24.04, 1.25-26.04, 1.26-26.04
 # CVSS: 5.3 (Medium) | Ubuntu priority: Medium | Status (26.04 resolute): Needs evaluation
