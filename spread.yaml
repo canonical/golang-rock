@@ -1,4 +1,4 @@
-project: golang-rock
+project: go:1.26-26.04
 
 backends:
   craft:
@@ -23,10 +23,10 @@ suites:
       sudo apt remove --yes retry
 
       # Load the rock into docker
-      sudo rockcraft.skopeo --insecure-policy copy "oci-archive:$CRAFT_ARTIFACT" docker-daemon:go-rock:latest
+      sudo rockcraft.skopeo --insecure-policy copy "oci-archive:$CRAFT_ARTIFACT" docker-daemon:go:1.26-26.04
 
     restore: |
-      docker image rm --force go-rock:latest
+      docker image rm --force go:1.26-26.04
 
 exclude:
   - .git
