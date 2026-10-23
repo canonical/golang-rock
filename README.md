@@ -62,4 +62,4 @@ There you *go*!
 
 ## Available versions
 
-* [Go 1.22 (Ubuntu 24.04)](./go-rock/1.22-24.04/rockcraft.yaml)
+* [Go 1.22 (Ubuntu 24.04)](https://github.com/canonical/golang-rock/tree/1.22-24.04)
