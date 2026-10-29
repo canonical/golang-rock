@@ -1,7 +1,7 @@
 name: go
-build-base: devel
+build-base: ubuntu@26.10
 base: bare
-version: '1.26'
+version: '1.27'
 summary: The Go programming language
 description: |
   Go is an open source programming language that enables the production of
