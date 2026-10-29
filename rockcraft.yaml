@@ -1,5 +1,6 @@
 name: go
-build-base: ubuntu@26.10
+# TODO: Update once 26.10 is stabilized
+build-base: devel
 base: bare
 version: '1.27'
 summary: The Go programming language
@@ -24,25 +25,45 @@ environment:
 parts:
   golang:
     plugin: nil
-    stage-packages:
-      - apt_apt-get
-      - base-files_base
-      - base-files_chisel
-      - base-files_release-info
-      - base-passwd_data
-      - bash_bins
-      - ca-certificates_data
-      - coreutils_bins
-      - debianutils_which
-      - findutils_bins
-      - golang_cgo-support
-      - grep_bins
-      - gzip_bins
-      - tar_bins
-      - wget_bins
-      - zstd_bins
+
+    # TODO: Uncomment once 26.10 is stabilized
+    # stage-packages:
+    #   - apt_apt-get
+    #   - base-files_base
+    #   - base-files_chisel
+    #   - base-files_release-info
+    #   - base-passwd_data
+    #   - bash_bins
+    #   - ca-certificates_data
+    #   - coreutils_bins
+    #   - debianutils_which
+    #   - findutils_bins
+    #   - golang_cgo-support
+    #   - grep_bins
+    #   - gzip_bins
+    #   - tar_bins
+    #   - wget_bins
+    #   - zstd_bins
+
     override-build: |
       craftctl default
+      # TODO: Remove once 26.10 is stabilized
+      chisel cut --release ubuntu-26.10 --root ${CRAFT_PART_INSTALL} \
+        apt_apt-get \
+        base-files_base \
+        base-files_release-info \
+        base-passwd_data \
+        bash_bins \
+        ca-certificates_data \
+        coreutils_bins \
+        debianutils_which \
+        findutils_bins \
+        golang_cgo-support \
+        grep_bins \
+        gzip_bins \
+        tar_bins \
+        wget_bins \
+        zstd_bins
 
       # Remove the unnecessary test files
       # Ref: https://github.com/canonical/chisel-releases/blob/ubuntu-26.04/slices/golang-1.26-src.yaml#L12
